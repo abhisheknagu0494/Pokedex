@@ -113,9 +113,10 @@ struct PokemonDetailView: View {
                         }
                     }
                 }
-                .padding()
             }
+            .ignoresSafeArea()
         }
+        .padding()
         .navigationTitle(pokemon.name.english)
     }
 }
