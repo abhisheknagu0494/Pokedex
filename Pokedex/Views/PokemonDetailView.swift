@@ -12,111 +12,108 @@ struct PokemonDetailView: View {
     let pokemon: Pokemon
     
     var body: some View {
-        ZStack {
-            ScrollView {
-                VStack(spacing: 24) {
-                    VStack(alignment: .center, spacing: 20)  {
-                        Text(pokemon.name.japanese)
-                            .font(.largeTitle)
-                            .foregroundStyle(LinearGradient(colors: [.red, .orange], startPoint: .leading, endPoint: .trailing))
-                        
-                        AsyncImage(url: URL(string: pokemon.image.thumbnail), transaction: Transaction(animation: .spring())) { phase in
-                            if let image = phase.image {
-                                // Display the loaded image
-                                image
-                                    .transition(.push(from: .trailing))
-                            }
-                            else if phase.error != nil {
-                                // Display a placeholder when loading failed
-                                Image(systemName: "questionmark.diamond")
-                                    .imageScale(.large)
-                            }
-                            else {
-                                // Display a placeholder while loading
-                                ProgressView()
-                                    .foregroundStyle(.red)
-                            }
+        ScrollView {
+            VStack(spacing: 24) {
+                VStack(alignment: .center, spacing: 20)  {
+                    Text(pokemon.name.japanese)
+                        .font(.largeTitle)
+                        .foregroundStyle(LinearGradient(colors: [.red, .orange], startPoint: .leading, endPoint: .trailing))
+                    
+                    AsyncImage(url: URL(string: pokemon.image.thumbnail), transaction: Transaction(animation: .spring())) { phase in
+                        if let image = phase.image {
+                            // Display the loaded image
+                            image
+                                .transition(.push(from: .trailing))
                         }
-                        
-                        Text(pokemon.species)
-                            .foregroundStyle(.primary)
-                            .font(.headline)
-                            .padding(.horizontal)
-                            .padding(.vertical)
+                        else if phase.error != nil {
+                            // Display a placeholder when loading failed
+                            Image(systemName: "questionmark.diamond")
+                                .imageScale(.large)
+                        }
+                        else {
+                            // Display a placeholder while loading
+                            ProgressView()
+                                .foregroundStyle(.red)
+                        }
                     }
                     
-                    VStack(alignment: .leading, spacing: 24) {
-                        Text(pokemon.description)
-                            .font(.subheadline)
-                        
-                        if let base = pokemon.base {
-                            ZStack {
-                                if pokemon.type.first == "Grass" {
-                                    Color.green.opacity(0.10)
-                                        .shadow(radius: 12)
-                                }
-                                else if pokemon.type.first == "Fire" {
-                                    Color.red.opacity(0.10)
-                                        .shadow(radius: 12)
-                                }
-                                else if pokemon.type.first == "Water" {
-                                    Color.blue.opacity(0.10)
-                                        .shadow(radius: 12)
-                                }
-                                else if pokemon.type.first == "Electric" {
-                                    Color.yellow.opacity(0.10)
-                                        .shadow(radius: 12)
-                                }
-                                else if pokemon.type.first == "Bug" {
-                                    Color.orange.opacity(0.10)
-                                        .shadow(radius: 12)
-                                }
-                                else if pokemon.type.first == "Rock" {
-                                    Color.black.opacity(0.10)
-                                        .shadow(radius: 12)
-                                }
-                                else if pokemon.type.first == "Ground" {
-                                    Color.brown.opacity(0.10)
-                                        .shadow(radius: 12)
-                                }
-                                else if pokemon.type.first == "Ghost" {
-                                    Color.purple.opacity(0.10)
-                                        .shadow(radius: 12)
-                                }
-                                else if pokemon.type.first == "Psychic" {
-                                    Color.pink.opacity(0.10)
-                                        .shadow(radius: 12)
-                                }
-                                else {
-                                    Color.secondary.opacity(0.10)
-                                        .shadow(radius: 12)
-                                }
-                                
-                                VStack(alignment: .leading, spacing: 10) {
-                                    Text("HP: \(base.HP)")
-                                        .foregroundStyle(.indigo)
-                                        .bold()
-                                    Text("Speed: \(base.Speed)")
-                                        .foregroundStyle(.orange)
-                                        .bold()
-                                    Text("Attack: \(base.Attack)")
-                                        .foregroundStyle(.secondary)
-                                        .bold()
-                                    Text("Defence: \(base.Defense)")
-                                        .foregroundStyle(.green)
-                                        .bold()
-                                }
-                                .padding()
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                    Text(pokemon.species)
+                        .foregroundStyle(.primary)
+                        .font(.headline)
+                        .padding(.horizontal)
+                        .padding(.vertical)
+                }
+                
+                VStack(alignment: .leading, spacing: 24) {
+                    Text(pokemon.description)
+                        .font(.subheadline)
+                    
+                    if let base = pokemon.base {
+                        ZStack {
+                            if pokemon.type.first == "Grass" {
+                                Color.green.opacity(0.10)
+                                    .shadow(radius: 12)
                             }
-                            .cornerRadius(20)
+                            else if pokemon.type.first == "Fire" {
+                                Color.red.opacity(0.10)
+                                    .shadow(radius: 12)
+                            }
+                            else if pokemon.type.first == "Water" {
+                                Color.blue.opacity(0.10)
+                                    .shadow(radius: 12)
+                            }
+                            else if pokemon.type.first == "Electric" {
+                                Color.yellow.opacity(0.10)
+                                    .shadow(radius: 12)
+                            }
+                            else if pokemon.type.first == "Bug" {
+                                Color.orange.opacity(0.10)
+                                    .shadow(radius: 12)
+                            }
+                            else if pokemon.type.first == "Rock" {
+                                Color.black.opacity(0.10)
+                                    .shadow(radius: 12)
+                            }
+                            else if pokemon.type.first == "Ground" {
+                                Color.brown.opacity(0.10)
+                                    .shadow(radius: 12)
+                            }
+                            else if pokemon.type.first == "Ghost" {
+                                Color.purple.opacity(0.10)
+                                    .shadow(radius: 12)
+                            }
+                            else if pokemon.type.first == "Psychic" {
+                                Color.pink.opacity(0.10)
+                                    .shadow(radius: 12)
+                            }
+                            else {
+                                Color.secondary.opacity(0.10)
+                                    .shadow(radius: 12)
+                            }
+                            
+                            VStack(alignment: .leading, spacing: 10) {
+                                Text("HP: \(base.HP)")
+                                    .foregroundStyle(.indigo)
+                                    .bold()
+                                Text("Speed: \(base.Speed)")
+                                    .foregroundStyle(.orange)
+                                    .bold()
+                                Text("Attack: \(base.Attack)")
+                                    .foregroundStyle(.secondary)
+                                    .bold()
+                                Text("Defence: \(base.Defense)")
+                                    .foregroundStyle(.green)
+                                    .bold()
+                            }
+                            .padding()
+                            .frame(maxWidth: .infinity, alignment: .leading)
                         }
+                        .cornerRadius(20)
                     }
                 }
             }
-            .ignoresSafeArea()
+            .padding()
         }
-        .padding()
         .navigationTitle(pokemon.name.english)
     }
 }
