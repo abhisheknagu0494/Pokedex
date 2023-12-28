@@ -13,9 +13,6 @@ struct PokemonDetailView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(colors: [.red, .orange], startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
-            
             ScrollView {
                 VStack(spacing: 24) {
                     VStack(alignment: .center, spacing: 20)  {
@@ -116,10 +113,9 @@ struct PokemonDetailView: View {
                         }
                     }
                 }
-            }.ignoresSafeArea(.all)
-            
+                .padding()
+            }
         }
-        .padding()
         .navigationTitle(pokemon.name.english)
     }
 }
