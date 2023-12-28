@@ -13,6 +13,8 @@ struct PokemonDetailView: View {
     
     var body: some View {
         ZStack {
+            LinearGradient(colors: [.red, .orange], startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
             
             ScrollView {
                 VStack(spacing: 24) {
